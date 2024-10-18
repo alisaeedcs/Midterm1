@@ -163,46 +163,59 @@ public:
             //set the head and tail equal to the new node
             head = tail = newNode;
         else {
-            //set the value after teh tail equal to the new node
+            //set the value after the existing tail node equal to the new node
             tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
+            newNode->prev = tail; //set the new nodes previous node element equal to the existing tail node
+            tail = newNode; //set the tail node within the class equal to the new node
         }
     }
     
-    void push_front(int v) {
-        Node* newNode = new Node(v);
+    //function to add node at beginning of list
+    void push_front(int v) { 
+        Node* newNode = new Node(v); //create new node with data v
+        //if list empty
         if (!head)
+            //set the head and tail equal to the new node
             head = tail = newNode;
+        //if list not empty
         else {
+            //set the new nodes next element to the existing head node
             newNode->next = head;
+            //set existing head node previous node equal to the new node
             head->prev = newNode;
+            //set head node equal to new node
             head = newNode;
         }
     }
     
+    //function to remove node at beginning of list
     void pop_front() {
-
+        //if list empty
         if (!head) {
-            cout << "List is empty." << endl;
-            return;
+            cout << "List is empty." << endl; //output
+            return; //exit function
         }
 
-        Node * temp = head;
+        Node * temp = head; //set temp node equal to current head or first node
 
+        //if node after the first node
         if (head->next) {
+            //set the head to the second node or node after
             head = head->next;
-            head->prev = nullptr;
+            head->prev = nullptr; //set the new head existing previous element to empty since its the first
         }
-        else
+        else //its just one node in the list
+            //set head and tail equal to null since it will be empty
             head = tail = nullptr;
-        delete temp;
+        delete temp; //delete the temporary node 
     }
 
+    //function to delete node at end of list
     void pop_back() {
+        //if list empty
         if (!tail) {
-            cout << "List is empty." << endl;
-            return;
+            cout << "List is empty." << endl; //output
+            return; //exit function
         }
         Node * temp = tail;
 
