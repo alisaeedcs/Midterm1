@@ -90,61 +90,80 @@ public:
         if (!temp) return; 
 
 
-        if (temp->prev) //if there is a previous value attached to the value we want to delete
-            temp->prev->next = temp->next; //set the value after the deleted one equal to the previous next value
+        if (temp->prev) //if there is a previous node attached to the node we want to delete
+            temp->prev->next = temp->next; //set the node after the deleted one equal to the previous' next node
         else
+        //else it would be the head node so set that equal to the node after the one we are going to delete
             head = temp->next; 
 
+        //if there is a node after the one we want to delete
         if (temp->next)
+        //set the node after the one we want to delete prev element to the element that was before the one we are going to delete
             temp->next->prev = temp->prev;
         else
-            tail = temp->prev; 
+            tail = temp->prev; //or it will be the tail since there is no value after so set the element before the one we delete to the tail
 
+        //delete the node that contains the value we put into function
         delete temp;
     }
 
+    //function to delete node by position
     void delete_pos(int pos) {
+        //if there is no head node
         if (!head) {
+            //output list is empty and exit function
             cout << "List is empty." << endl;
             return;
         }
     
+        //if the parameter is equal to 1
         if (pos == 1) {
-            pop_front();
-            return;
+            pop_front(); //remove the first node using other function
+            return; //exit function
         }
     
+        //set temporary node equal to the first element
         Node* temp = head;
     
+        //for loop that stops at position of list
         for (int i = 1; i < pos; i++){
+            //if position does not exist
             if (!temp) {
-                cout << "Position doesn't exist." << endl;
-                return;
+                cout << "Position doesn't exist." << endl; //output
+                return; //exit function
             }
-            else
-                temp = temp->next;
+            else //if function exists
+                temp = temp->next; // go to next node (until the position parameter)
         }
+        //if no node exists at the position
         if (!temp) {
-            cout << "Position doesn't exist." << endl;
-            return;
+            cout << "Position doesn't exist." << endl; //output
+            return; //exit function
         }
     
+        //if it is the tail, or last node 
         if (!temp->next) {
-            pop_back();
-            return;
+            pop_back(); // use other function to delete
+            return; //exit
         }
     
-        Node* tempPrev = temp->prev;
-        tempPrev->next = temp->next;
-        temp->next->prev = tempPrev;
-        delete temp;
+        //set pointers
+        Node* tempPrev = temp->prev; //set a temporary previous node to the one before the deleted
+        tempPrev->next = temp->next; //set this ^ node next value to the value after the one to be deleted
+        temp->next->prev = tempPrev; //set the node after the one to be deleted previous element to the temporary node at the top of these pointer declarations
+        delete temp; //delete the node
     }
 
+    //add node at end of list
     void push_back(int v) {
+        //craete new node with value v as data
         Node* newNode = new Node(v);
+        //if the list is empty
         if (!tail)
+            //set the head and tail equal to the new node
             head = tail = newNode;
         else {
+            //set the value after teh tail equal to the new node
             tail->next = newNode;
             newNode->prev = tail;
             tail = newNode;
