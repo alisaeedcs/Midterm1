@@ -46,37 +46,52 @@ public:
 
         //otherwise if there is a head node, set it equal to a temporary node that begins at the head
         Node* temp = head;
-        //go through the list with for loop ad keep on incrementing
+        //go through the list with for loop ad keep on incrementing right before it reaches the value 
         for (int i = 0; i < position && temp; ++i)
-            temp = temp->next;
+            temp = temp->next; //keep on moving to next node
 
+        //if position is out of bounds / goes past the range
         if (!temp) {
+            //output that it the position is past the length of the lise
             cout << "Position exceeds list size. Node not inserted.\n";
+            //delete the newNode
             delete newNode;
-            return;
+            return; //exit function
         }
 
-        newNode->next = temp->next;
-        newNode->prev = temp;
+        //input the new node right after the node that is found to be the position
+        newNode->next = temp->next; //set newnode next val to value after temp
+        newNode->prev = temp; //set newnode prev val to temp itself
+        //if there was a next node for the temp
         if (temp->next)
+            //set the node after the temp node's prev value = newNode
             temp->next->prev = newNode;
         else
-            tail = newNode;
-        temp->next = newNode;
+        //otherwsie oif there was no next node or it was basically the last position
+            tail = newNode; // set the tail of the list = to the new node
+        temp->next = newNode; //and just set the next value 
     }
 
+    //function to delete a specific node with "value" within the list
     void delete_val(int value) {
+        //if the list is empty quit funct
         if (!head) return;
 
+        //set the temp node to the head/first node
         Node* temp = head;
         
+        //go through the list
+        //while there is a temp variable and the value within it is not equal to parameter
         while (temp && temp->data != value)
+            //go to the next node
             temp = temp->next;
 
+        //if there is never a node with value that is found exit
         if (!temp) return; 
 
-        if (temp->prev)
-            temp->prev->next = temp->next;
+
+        if (temp->prev) //if there is a previous value attached to the value we want to delete
+            temp->prev->next = temp->next; //set the value after the deleted one equal to the previous next value
         else
             head = temp->next; 
 
