@@ -217,51 +217,62 @@ public:
             cout << "List is empty." << endl; //output
             return; //exit function
         }
-        Node * temp = tail;
+        Node * temp = tail; //set temp node equal to last node in list / tail node
 
+        //if there is a node prior to the tail basically meaning its not the only node in the list
         if (tail->prev) {
-            tail = tail->prev;
-            tail->next = nullptr;
+            tail = tail->prev; //set the node tail equal to the node before the existing tail node
+            tail->next = nullptr; //set the next element of the new tail equal to null since it is now the tail
         }
+        //if it is only one node in list
         else
-            head = tail = nullptr;
-        delete temp;
+            head = tail = nullptr; //set both head and tail to null since list is empty
+        delete temp; //delete temp node
     }
 
+    //destructor (clears memory)
     ~DoublyLinkedList() {
-        while (head) {
-            Node* temp = head;
-            head = head->next;
-            delete temp;
+        while (head) { //while there is a node in the list specifically the first node
+            Node* temp = head; //set a temp node equal to the first node
+            head = head->next; //set the existing head node to the one after it
+            delete temp; //delete the temp node
         }
     }
+    //method to print / output list
     void print() {
-        Node* current = head;
-        if (!current) {
-            cout << "List is empty." << endl;
-            return;
+        Node* current = head; //set iterator node to first node in list
+        if (!current) { //if there is no node or list is empty essentially
+            cout << "List is empty." << endl; //output
+            return; //exit fucntion
         }
-        while (current) {
-            cout << current->data << " ";
-            current = current->next;
+        while (current) { //while a node exists after beign incremented
+            cout << current->data << " "; //output the int stored in the node
+            current = current->next; //move on to the next node in list
         }
-        cout << endl;
+        cout << endl; //output an empty line
     }
 
+    //method to print / output list but backwards
     void print_reverse() {
-        Node* current = tail;
-        if (!current) { 
-            cout << "List is empty." << endl;
-            return;
+        Node* current = tail; //set iterator node to the last node / tail
+        if (!current) {  //if the list is empty / there is not tail node (has to exist if its not empty)
+            cout << "List is empty." << endl; //output
+            return; //exit function
         }
-        while (current) {
-            cout << current->data << " ";
-            current = current->prev;
+        while (current) { //while there is a node at current
+            cout << current->data << " "; //output the int stored in this node
+            current = current->prev; //move on to the previous node in list
         }
-        cout << endl;
+        cout << endl; //output empty line
+    }
+
+    //function that outputs every like odd element in the list (starts at 1 and skips 2 outputs 3 ...)
+    void every_other_element() {
+
     }
 };
 
+//
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
