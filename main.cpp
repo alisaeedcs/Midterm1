@@ -46,7 +46,7 @@ public:
 
         //otherwise if there is a head node, set it equal to a temporary node that begins at the head
         Node* temp = head;
-        //go through the list with for loop ad keep on incrementing right before it reaches the value 
+        //keep incrementing until the position is reached and while the temp node exists (not null)
         for (int i = 0; i < position && temp; ++i)
             temp = temp->next; //keep on moving to next node
 
@@ -281,14 +281,14 @@ public:
             //debugging: only line different from other functions is the one above, and segmentation
             //faults are correlated to accessing memeory that does not exist?
             //maybe check if there is a next variable that exists before calling it?
-            if (current->next) {
-                current = current->next->next;
+            if (current->next) { //if there is a node after the current
+                current = current->next->next; //set the iterator node to the node after that
             }
-            else {
-                return;
+            else { //if there is not
+                return; //exit function
             }
         }
-        cout << endl;
+        cout << endl; //clear line
     }
 };
 
@@ -307,13 +307,13 @@ int main() {
     numbers.push_back(8);
     numbers.push_back(10);
     //list of 5 numbers
-    // [2, 4, 6, 8, 10]
+    // 2 4 6 8 10
 
     //now call for every other element function
     // expecting list below
-    // 2, 6, 10
+    // 2 6 10
 
-    numbers.every_other_element(); 
+    numbers.every_other_element(); //call function through the list
     //first attempt: getting segmentation fault?
     //second attempt: still
     //going to quit my terminal and see if it helps (didnt help) 
