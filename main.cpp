@@ -241,11 +241,11 @@ public:
     //method to print / output list
     void print() {
         Node* current = head; //set iterator node to first node in list
-        if (!current) { //if there is no node or list is empty essentially
+        if (!current) { //if there is no head  node or list is empty essentially
             cout << "List is empty." << endl; //output
             return; //exit fucntion
         }
-        while (current) { //while a node exists after beign incremented
+        while (current) { //while a node exists after being incremented
             cout << current->data << " "; //output the int stored in the node
             current = current->next; //move on to the next node in list
         }
@@ -268,7 +268,20 @@ public:
 
     //function that outputs every like odd element in the list (starts at 1 and skips 2 outputs 3 ...)
     void every_other_element() {
+        Node* current = head; //set iterator node to first node in list
+        if (!current) { //if there is no head  node or list is empty essentially
+            cout << "List is empty." << endl; //output
+            return; //exit function
+        }
+        //all code above is good
 
+        while (current) { //while there is a node at current
+            cout << current->data << " "; //output the int stored in the node
+            current = current->next->next; //move on to the node after the next node in list
+            //debugging: only line different from other functions is the one above, and segmentation
+            //faults are correlated to accessing memeory that does not exist?
+            //maybe check if there is a next variable that exists before calling it?
+        }
     }
 };
 
@@ -276,6 +289,28 @@ public:
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
-    
+    //testing the new class function
+    //first make a list using the class declaration
+    DoublyLinkedList numbers;
+
+    //use .push_back for ease of use
+    numbers.push_back(2);
+    numbers.push_back(4);
+    numbers.push_back(6);
+    numbers.push_back(8);
+    numbers.push_back(10);
+    //list of 5 numbers
+    // [2, 4, 6, 8, 10]
+
+    //now call for every other element function
+    // expecting list below
+    // [2, 6, 10]
+
+    numbers.every_other_element(); 
+    //first attempt: getting segmentation fault?
+    //second attempt: still
+    //going to quit my terminal and see if it helps (didnt help) 
+    //lets look back at my function i made
+
     return 0;
 }
