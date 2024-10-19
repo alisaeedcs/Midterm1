@@ -277,18 +277,25 @@ public:
 
         while (current) { //while there is a node at current
             cout << current->data << " "; //output the int stored in the node
-            current = current->next->next; //move on to the node after the next node in list
+             //current = current->next->next; //move on to the node after the next node in list (got rid of cuz faults)
             //debugging: only line different from other functions is the one above, and segmentation
             //faults are correlated to accessing memeory that does not exist?
             //maybe check if there is a next variable that exists before calling it?
+            if (current->next) {
+                current = current->next->next;
+            }
+            else {
+                return;
+            }
         }
+        cout << endl;
     }
 };
 
 //
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
-
+    cout << endl; //clear line between this
     //testing the new class function
     //first make a list using the class declaration
     DoublyLinkedList numbers;
@@ -304,13 +311,15 @@ int main() {
 
     //now call for every other element function
     // expecting list below
-    // [2, 6, 10]
+    // 2, 6, 10
 
     numbers.every_other_element(); 
     //first attempt: getting segmentation fault?
     //second attempt: still
     //going to quit my terminal and see if it helps (didnt help) 
     //lets look back at my function i made
-
+    //fourth attempt (after fixing function) started outputting in infinite loop
+    //lets see if regular print methods work (they do)
+    // got it to work after adding the else method to stop it from keeping on output after there is like not another value :)
     return 0;
 }
