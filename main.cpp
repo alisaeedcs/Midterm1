@@ -1,3 +1,6 @@
+//comsc-210 | Ali Saeed | Midterm 1
+//ide used: vs code
+
 #include <iostream>
 using namespace std;
 
